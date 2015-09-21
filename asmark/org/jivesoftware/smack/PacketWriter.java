@@ -236,13 +236,13 @@ class PacketWriter {
     	new HeartBeatThread().start();
 	}
     
-    //心跳连接，向服务器发送是否客户端掉线，190后服务端将客户端踢下线
+    //心跳连接，向服务器发送是否客户端掉线，190Sn内没有发送，服务端将客户端踢下线
     class HeartBeatThread extends Thread{
     	@Override
     	public void run() {
     		while (!done) {
     			try {
-    				writer.write("");
+    				writer.write(" ");
     		        writer.flush();
     		        Log.d("TAG", "send heart beat once ....");
     		        Thread.sleep(60*1000);
