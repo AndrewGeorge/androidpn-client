@@ -16,9 +16,11 @@
 package org.androidpn.client;
 
 import org.jivesoftware.smack.PacketListener;
+import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 
 import android.content.Intent;
+import android.provider.ContactsContract.DeletedContacts;
 import android.util.Log;
 
 /** 
@@ -70,6 +72,13 @@ public class NotificationPacketListener implements PacketListener {
                 //                        System.currentTimeMillis()).toString()));
 
                 xmppManager.getContext().sendBroadcast(intent);
+                //客户端收到消息之后的回执
+                DeliverConfirmIQ deliverConfirmIQ=new DeliverConfirmIQ();
+                deliverConfirmIQ.setUuid(notification.getId());
+                deliverConfirmIQ.setType(IQ.Type.SET);
+                
+                xmppManager.getConnection().sendPacket(deliverConfirmIQ);
+                Log.d(LOGTAG, "发送接收到离线消息回执消息...");
             }
         }
 
