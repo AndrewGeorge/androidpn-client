@@ -225,7 +225,7 @@ public class XmppManager {
 		return connection != null && connection.isConnected();
 	}
 
-	private boolean isAuthenticated() {
+	public boolean isAuthenticated() {
 		return connection != null && connection.isConnected()
 				&& connection.isAuthenticated();
 	}
@@ -482,7 +482,9 @@ public class XmppManager {
 							.getNotificationPacketListener();
 					connection.addPacketListener(packetListener, packetFilter);
 					connection.startHeartBeat();
-					
+					synchronized (xmppManager) {
+						xmppManager.notifyAll();
+					}
 
 				} catch (XMPPException e) {
 					Log.e(LOGTAG, "LoginTask.run()... xmpp error");

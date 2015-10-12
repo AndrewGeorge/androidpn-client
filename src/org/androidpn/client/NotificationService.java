@@ -69,6 +69,8 @@ public class NotificationService extends Service {
     private SharedPreferences sharedPrefs;
 
     private String deviceId;
+    
+    private static NotificationService notificationService;
 
     public NotificationService() {
         notificationReceiver = new NotificationReceiver();
@@ -81,9 +83,14 @@ public class NotificationService extends Service {
         taskTracker = new TaskTracker(this);
     }
 
+    public static NotificationService getnotificationService(){
+		return notificationService;
+    	
+    }
     @Override
     public void onCreate() {
         Log.d(LOGTAG, "onCreate()...");
+        notificationService=this;
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         // wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         // connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -131,6 +138,7 @@ public class NotificationService extends Service {
     @Override
     public void onDestroy() {
         Log.d(LOGTAG, "onDestroy()...");
+        notificationService=null;
         stop();
     }
 
