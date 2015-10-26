@@ -69,6 +69,7 @@ public class Constants {
     public static final String NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE";
 
     public static final String NOTIFICATION_URI = "NOTIFICATION_URI";
+    public static final String NOTIFICATION_IMAGE_URL = "NOTIFICATION_IMAGE_URL";
 
     // INTENT ACTIONS
 
