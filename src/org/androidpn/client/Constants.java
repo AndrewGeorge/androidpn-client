@@ -53,6 +53,8 @@ public class Constants {
     public static final String SETTINGS_NOTIFICATION_ENABLED = "SETTINGS_NOTIFICATION_ENABLED";
 
     public static final String SETTINGS_SOUND_ENABLED = "SETTINGS_SOUND_ENABLED";
+    
+    public static final String SETINGS_AUTO_START="SETINGS_AUTO_START";
 
     public static final String SETTINGS_VIBRATE_ENABLED = "SETTINGS_VIBRATE_ENABLED";
 

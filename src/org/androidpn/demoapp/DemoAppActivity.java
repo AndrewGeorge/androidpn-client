@@ -18,12 +18,15 @@ package org.androidpn.demoapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.androidpn.client.NotificationHistoryActivity;
 import org.androidpn.client.ServiceManager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
 /**
@@ -42,11 +45,20 @@ public class DemoAppActivity extends Activity {
 
         // Settings
         Button okButton = (Button) findViewById(R.id.btn_settings);
+        Button histortButton = (Button) findViewById(R.id.btn_history);
         okButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 ServiceManager.viewNotificationSettings(DemoAppActivity.this);
             }
         });
+        histortButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+			Intent intent=new Intent(DemoAppActivity.this,NotificationHistoryActivity.class);
+				startActivity(intent);
+			}
+		});
 
         // Start the service
         ServiceManager serviceManager = new ServiceManager(this);

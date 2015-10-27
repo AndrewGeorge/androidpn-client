@@ -15,9 +15,14 @@
  */
 package org.androidpn.client;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smackx.packet.MUCInitialPresence.History;
+import org.litepal.crud.DataSupport;
 
 import android.content.Intent;
 import android.provider.ContactsContract.DeletedContacts;
@@ -56,6 +61,18 @@ public class NotificationPacketListener implements PacketListener {
                 String notificationMessage = notification.getMessage();
                 String notificationUri = notification.getUri();
                 String notificationImageUrl=notification.getImageUrl();
+                
+                NotificationHistory notificationHistory=new NotificationHistory();
+                notificationHistory.setTitle(notificationTitle);
+                notificationHistory.setMessage(notificationMessage);
+                notificationHistory.setApiKey(notificationApiKey);
+                notificationHistory.setUri(notificationUri);
+                notificationHistory.setImageUrl(notificationImageUrl);
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String time=sdf.format(new Date());
+                notificationHistory.setTime(time);
+                notificationHistory.save();
+                
                 Intent intent = new Intent(Constants.ACTION_SHOW_NOTIFICATION);
                 intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
                 intent.putExtra(Constants.NOTIFICATION_API_KEY,
